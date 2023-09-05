@@ -1,61 +1,90 @@
-var you;
-var yourScore = 0;
-var opponent;
-var opponentScore = 0;
+/* script.js */
 
-var choices = ["rock", "paper", "scissors"];
+/**
+ * Declare constants for DOM elements and possible choices
+ */
 
-window.onload = function () {
-    for (let i = 0; i < 3; i++) {
-        // <img id="rock" src="rock.png">
-        let choice = document.createElement("img");
-        choice.id = choices[i];
-        choice.src = choices[i] + ".png";
-        choice.addEventListener("click", selectChoice);
-        document.getElementById("choices").append(choice);
-    }
-};
+const buttons = document.getElementsByClassName("control");
+const playerScore = document.getElementById("player-score");
+const computerScore = document.getElementById("computer-score");
+const playerImage = document.getElementById("player-image");
+const computerImage = document.getElementById("computer-image");
+const messages = document.getElementById("messages");
+const choices = ["rock", "paper", "scissors"];
 
-function selectChoice() {
-    you = this.id;
-    document.getElementById("your-choice").src = you + ".png";
+/**
+ * Add event listener to all the buttons
+ */
 
-    //random for oppponent
-    opponent = choices[Math.floor(Math.random() * 3)]; //0- .999999 * 3 = 0-2.99999
-    document.getElementById("opponent-choice").src = opponent + ".png";
-
-    //check for winner
-    if (you == opponent) {
-        yourScore += 1;
-        opponentScore += 1;
-    }
-    else {
-        if (you == "rock") {
-            if (opponent == "scissors") {
-                yourScore += 1;
-            }
-            else if (opponent == "paper") {
-                opponentScore += 1;
-            }
-        }
-        else if (you == "scissors") {
-            if (opponent == "paper") {
-                yourScore += 1;
-            }
-            else if (opponent == "rock") {
-                opponentScore += 1;
-            }
-        }
-        else if (you == "paper") {
-            if (opponent == "rock") {
-                yourScore += 1;
-            }
-            else if (opponent == "scissors") {
-                opponentScore += 1;
-            }
-        }
-    }
-
-    document.getElementById("your-score").innerText = yourScore;
-    document.getElementById("opponent-score").innerText = opponentScore;
+for (let button of buttons) {
+    button.addEventListener("click", function () {
+        let playerChoice = this.getAttribute("data-choice");
+        playGame(playerChoice);
+    });
 }
+
+/**
+ * The main game function. Accepts one parameter, which
+ * is the data-choice value of the selected button
+ */
+
+function playGame(playerChoice) {
+    // Generate a random computer choice (0, 1, or 2)
+    let computerChoice = Math.floor(Math.random() * 3);
+
+    // Update the player and computer images
+    playerImage.src = `assets/images/${choices[playerChoice]}.png`;
+    playerImage.alt = choices[playerChoice];
+    computerImage.src = `assets/images/${choices[computerChoice]}.png`;
+    computerImage.alt = choices[computerChoice];
+
+    let result = checkWinner(choices[computerChoice], choices[playerChoice]);
+    updateScores(result);
+}
+
+/**
+ * Checks to see who the winner is, it accepts two strings as parameters
+ */
+function checkWinner(computerChoice, playerChoice) {
+    if (computerChoice === playerChoice) {
+        return "draw";
+    } else if (
+        (computerChoice === "rock" && playerChoice === "scissors") ||
+        (computerChoice === "paper" && playerChoice === "rock") ||
+        (computerChoice === "scissors" && playerChoice === "paper")
+    ) {
+        return "computer";
+    } else {
+        return "player";
+    }
+}
+
+/**
+ * Update the scores and messages based on the game result
+ */
+function updateScores(result) {
+    if (result === "player") {
+        playerScore.textContent = parseInt(playerScore.textContent) + 1;
+        messages.textContent = "You win!";
+    } else if (result === "computer") {
+        computerScore.textContent = parseInt(computerScore.textContent) + 1;
+        messages.textContent = "Computer wins!";
+    } else {
+        messages.textContent = "It's a draw!";
+    }
+}
+
+// Reset scores and messages
+function resetGame() {
+    playerScore.textContent = "0";
+    computerScore.textContent = "0";
+    messages.textContent = "Choose your weapon!";
+    playerImage.src = "assets/images/rps.png";
+    computerImage.src = "assets/images/rps.png";
+    playerImage.alt = "Rock Paper Scissors";
+    computerImage.alt = "Rock Paper Scissors";
+}
+
+// Add a reset button event listener
+const resetButton = document.getElementById("reset-button");
+resetButton.addEventListener("click", resetGame);
