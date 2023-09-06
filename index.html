@@ -3,42 +3,60 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors</title>
+    <!-- Meta tags for search engines -->
+    <meta name="description"
+        content="Rock Paper Scissors. An easy to learn game of chance to be enjoyed by all age groups">
+    <meta name="keywords" content="rock, paper, scissors, game, player, computer, score">
+
+    <!-- favicon -->
+    <link rel="icon" href="assets/images/favicon_io/favicon.ico">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <title>Rock Paper Scissors</title>
 </head>
 
 <body>
-    <header>
-        <h2> Rock, Paper, Scissors</h2>
+    <!-- Heading -->
+    <header class="heading">
+        <h1>Rock Paper Scissors</h1>
     </header>
+
+    <!-- Main Game Area to display message, player and computer choices-->
     <section class="game-area">
         <div>
-            <p> Make a choice:</p>
-            <button aria-label="Rock" data-choice="0" class="control">Rock</button>
-            <button aria-label="Paper" data-choice="1" class="control">Paper</button>
-            <button aria-label="Scissors" data-choice="2" class="control">Scissors</button>
+            <p id="make-choice">Make a choice:</p>
+            <button aria-label="Rock" data-choice="0" class="control" id="rock-btn">Rock</button>
+            <button aria-label="Paper" data-choice="1" class="control" id="paper-btn">Paper</button>
+            <button aria-label="Scissors" data-choice="2" class="control" id="scissors-btn">Scissors</button>
         </div>
         <div id="messages"></div>
+        <div class="remainingRounds">Remaining Rounds: 10</div>
+        <!-- scoreboard displays current player & computer scores -->
+        <div id="score" class="score">
+            <p>Player Score: 0</p>
+            <p>Computer Score: 0</p>
+        </div>
         <div class="player">
-            <h3 class="scores">Your score: <span id="player-score">0</span></h3>
+            <h3 class="scores">The Player's Choice<span id="player-score"></span></h3>
             <img id="player-image" src="assets/images/rps.png" alt="Rock Paper Scissors">
         </div>
         <div class="computer">
-            <h3 class="scores">Computer score: <span id="computer-score">0</span></h3>
+            <h3 class="scores">The Computer's Choice<span id="computer-score"></span></h3>
             <img id="computer-image" src="assets/images/rps.png" alt="Rock Paper Scissors">
         </div>
+        <!-- Reset button stops the current game and sets it to a new restart phase -->
+        <button id="reset" class="resetBtn">Reset</button>
     </section>
 
-    <footer>
+    <!-- Footer with the rules of the game -->
+    <footer class="footer">
         <h3>Rules</h3>
-        <p>Scissors cut Paper | Paper covers Rock | Rock blunts Scissors</p>
-
+        <p>First to win 3 rounds wins the game!</p>
+        <p>Scissors cuts Paper | Paper covers Rock | Rock blunts Scissors</p>
     </footer>
+
+    <script src="assets/js/script.js"></script>
 </body>
 
 </html>
-
-    

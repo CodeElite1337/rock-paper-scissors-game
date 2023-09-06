@@ -1,74 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Otomanopee+One&display=swap');
+/* Google fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;1,100;1,300&display=swap');
 
-/* style.css file */
-/* Main view setup */
-
-html {
-
-    min-height: 100%;
-    position: relative;
-}
-
-body {
-
-    font-family: 'Otomanopee One', sans-serif;
+/* Asterisk wildcard selector to override default styles added by the browser */
+* {
+    padding: 0;
     margin: 0;
-}
-
-/* Header and footer */
-
-header {
-    text-align: center;
-    height: 50px;
-}
-
-
-footer {
-
-    position: absolute;
-    width: 100%;
-    left: 0;
-    bottom: 0;
     box-sizing: border-box;
-    min-height: 80px;
-    padding-top: 5px;
-    text-align: center;
-    color: #fff;
-    background-color: #000;
 }
 
+/* General styles */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* Generic project styles */
+    color: #000000;
+    font-family: 'Roboto', sans-serif;
+}
 
-/* Game area */
+/* Header */
+header {
+    background-color: #ffffff;
+    padding: 1rem;
+    z-index: 99;
+    text-align: center;
+    height: 5rem;
+    width: 100%;
+    box-shadow: 0 2px 2px #000000;
+}
 
+/* Footer */
+footer {
+    background-color: #ffffff;
+    text-align: center;
+    padding: 1.1rem;
+}
+
+/* section / main game area */
 .game-area {
-
+    background-color: #ffffff;
+    /* Make section element take up any surplus space to push footer down */
+    flex: 1 0 auto;
     width: 75%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 1%;
     text-align: center;
+    background: wheat;
 }
 
-
+/* control buttons */
 .control {
-
     display: inline-block;
     margin: 2px;
-    width: 80px;
-    height: 40px;
+    width: 5rem;
+    height: 2.5rem;
+    margin: 4px 2px;
 }
 
+.control:hover {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#make-choice {
+    padding: 5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* messages display  */
 #messages {
-    height: 20px;
+    height: 1.5rem;
+    font-size: 1.3rem;
 }
 
+/* remaining rounds display  */
+.remainingRounds {
+    height: 1.5rem;
+    font-size: 1.3rem;
+}
+
+/* scoreboard display */
+.score {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 1.2rem;
+    color: #000000;
+    padding: 5px;
+}
+
+
+/* player & computer containers */
 .player {
     background-color: lightblue;
     float: left;
     width: 45%;
-
 }
-
 
 #player-image {
     width: 75%;
@@ -82,4 +110,80 @@ footer {
 
 #computer-image {
     width: 75%;
+}
+
+/* reset button */
+.resetBtn {
+    display: none;
+    background: #f4f4f4;
+    color: #333333;
+    padding: 0.4rem 1.3rem;
+    font-size: 1rem;
+    outline: none;
+    border: none;
+    margin: 1.5rem;
+    width: 5rem;
+    height: 2.5rem;
+}
+
+.resetBtn:hover {
+    cursor: pointer;
+    background: #99ff66;
+    color: #ffffff;
+}
+
+
+/* MEDIA QUERIES */
+
+/* For small screen sizes from 850px wide and below */
+@media screen and (max-width: 850px) {
+
+    .player,
+    .computer {
+        float: none;
+        width: 60%;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+
+    .score {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+/* For small screen sizes from 350px wide and below */
+@media screen and (max-width: 350px) {
+    header {
+        font-size: 12px;
+        box-shadow: none;
+        margin-bottom: 10px;
+    }
+
+    #make-choice {
+        padding: 5px;
+        font-size: 1.2rem;
+    }
+
+    .control {
+        width: 4rem;
+        height: 2rem;
+    }
+
+    #messages {
+        font-size: 1rem;
+    }
+
+    .remainingRounds {
+        font-size: 1rem;
+    }
+
+    .score {
+        font-size: 1rem;
+    }
+
+    h3 {
+        font-size: 13px;
+    }
+
 }
